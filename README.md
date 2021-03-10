@@ -1,3 +1,56 @@
+This is a sample application that make use of amplify + appsync to do a realtime message broadcasting.
+
+## Procedures to create this application from scratch
+```
+npx create-react-app realtime-msg
+cd realtime-msg
+amplify init
+npm install aws-amplify @aws-amplify/ui-react
+```
+
+Open src/index.js and add the following code below the last import:
+
+```
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
+```
+
+```
+amplify add api
+```
+Change schema to:
+```
+type Message @model {
+    id: ID!
+    message: String!
+    createdAt: String
+}
+```
+```amplify push```
+
+Install bootstrap: `npm install --save react-bootstrap bootstrap@3`
+
+Install other amplify modules: `npm install @aws-amplify/api @aws-amplify/core @aws-amplify/pubsub @aws-amplify/ui-react`
+
+Modify `src/App.js` (copy from AWS blog), then start the app locally:
+
+```
+amplify serve
+```
+
+Alternatively publish to public:
+```
+amplify add hosting
+amplify publish
+```
+
+
+References:
+- [AWS Blogs: New features that will enhance your Real-Time experience on AWS AppSync](https://aws.amazon.com/blogs/mobile/appsync-realtime/)
+- [Tutorial - Set up fullstack project - Amplify Docs](https://docs.amplify.aws/start/getting-started/setup/q/integration/react#initialize-a-new-backend)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
